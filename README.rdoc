@@ -1,0 +1,81 @@
+= w32evol_wrapper -- w32evol obfuscation engine wrapped in Ruby
+
+== Table of Contents
+1. Introduction
+2. Dependencies
+3. Installation
+4. Usage
+5. Development
+
+== 1. Introduction
+<b>Does not contain a virus</b>
+
+This is a Ruby wrapper for the obfuscation engine 
+{w32evol}[https://bitbucket.org/martinvelez/w32evol].
+
+The w32evol obfuscation engine has a command line interface.  This wrapper
+allows you to use the obfuscation engine within your Ruby scripts.  
+
+== 2. Dependencies
+
+=== General
+
+* {w32evol}[https://bitbucket.org/martinvelez/w32evol/downloads]
+
+== Installation
+
+=== Rubygems:
+ gem install w32evol_ruby
+
+=== Not Rubygems:
+1. Download w32evol_ruby[http://bitbucket.org/martinvelez/w32evol_ruby/downloads]
+2.  
+
+
+=== Note 1
+You might need to use sudo.
+
+=== Note 2
+Currently, this gem includes the trial version of 
+{Stunnix C++ Obfuscator}[http://www.stunnix.com/prod/cxxo/evaluate.shtml].
+It is placed in this gems "ext" folder.
+
+When this gem is released to the public, the obfuscation engine should not be
+distributed with this gem because it is proprietary code.  The user should be
+asked to download and install the obfuscation engine.
+
+== Usage
+
+=== Example 1
+This example is found in the examples directory.
+ #!/usr/bin/env ruby
+
+ require 'stunnix_cxx_wrapper'
+
+ input = ARGF.read
+ # Assuming engine is installed in this gem's "ext" folder.
+ # Otherwise, you must pass the engine's executable path to the class's 
+ # constructor.
+ # For example:
+ # engine = StunnixCXX.new({:command => "/path/to/engine"})
+ engine = StunnixCXX.new
+
+ output, errors, status = engine.obfuscate(input)
+
+ puts "STATUS:", status
+ puts "ERRORS: ", errors
+ puts "OUTPUT:", output
+
+== Dependencies
+
+1. Ruby 1.9.2 or greater
+2. Stunnix C++ Obfuscator
+
+== Development
+
+=== Source
+ http://bitbucket.org/martinvelez/stunnix_cxx_wrapper
+
+=== Issues and Bug Reports
+Provide feedback, get help, request features, and reports bugs here:
+ https://bitbucket.org/martinvelez/stunnix_cxx_wrapper/issues?status=new?status=open
