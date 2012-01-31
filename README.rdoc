@@ -13,52 +13,42 @@
 This is a Ruby wrapper for the obfuscation engine 
 {w32evol}[https://bitbucket.org/martinvelez/w32evol].
 
-The w32evol obfuscation engine has a command line interface.  This wrapper
-allows you to use the obfuscation engine within your Ruby scripts.  
+The {w32evol}[https://bitbucket.org/martinvelez/w32evol] obfuscation engine 
+has a command line interface.  This wrapper allows you to use the obfuscation 
+engine within your Ruby scripts.  
 
 == 2. Dependencies
 
-=== General
-
+* {Ruby 1.9.2}[http://www.ruby-lang.org/en/downloads/] or greater
 * {w32evol}[https://bitbucket.org/martinvelez/w32evol/downloads]
+* {wine}[http://www.winehq.org/download) (1.3 or greater, may work with 1.2)
 
-== Installation
+== 3. Installation
 
 === Rubygems:
  gem install w32evol_ruby
 
+<b>Note 1</b> You might need to use sudo.
+
 === Not Rubygems:
 1. Download w32evol_ruby[http://bitbucket.org/martinvelez/w32evol_ruby/downloads]
-2.  
+2. Use the w32evol Ruby class in the lib folder in your program. 
 
-
-=== Note 1
-You might need to use sudo.
-
-=== Note 2
-Currently, this gem includes the trial version of 
-{Stunnix C++ Obfuscator}[http://www.stunnix.com/prod/cxxo/evaluate.shtml].
-It is placed in this gems "ext" folder.
-
-When this gem is released to the public, the obfuscation engine should not be
-distributed with this gem because it is proprietary code.  The user should be
-asked to download and install the obfuscation engine.
-
-== Usage
+== 4. Usage
 
 === Example 1
 This example is found in the examples directory.
  #!/usr/bin/env ruby
 
- require 'stunnix_cxx_wrapper'
+ require 'w32evol_ruby'
 
  input = ARGF.read
  # Assuming engine is installed in this gem's "ext" folder.
  # Otherwise, you must pass the engine's executable path to the class's 
  # constructor.
  # For example:
- # engine = StunnixCXX.new({:command => "/path/to/engine"})
- engine = StunnixCXX.new
+ # engine = W32Evol.new({:command => "/path/to/engine"})
+ engine = W32Evol.new
 
  output, errors, status = engine.obfuscate(input)
 
@@ -66,16 +56,16 @@ This example is found in the examples directory.
  puts "ERRORS: ", errors
  puts "OUTPUT:", output
 
-== Dependencies
 
-1. Ruby 1.9.2 or greater
-2. Stunnix C++ Obfuscator
-
-== Development
+== 5. Development
+Author:: 		{Martin Velez}[http://www.martinvelez.com]
+Copyright::	Copyright (C) 2012 {Martin Velez}[http://www.martinvelez.com]
+License:: GPL[http://www.gnu.org/copyleft/gpl.html]
 
 === Source
- http://bitbucket.org/martinvelez/stunnix_cxx_wrapper
+Bitbucket[https://bitbucket.org/martinvelez/w32evol_ruby/src) is hosting this code.
+ http://bitbucket.org/martinvelez/w32evol_ruby/src
 
 === Issues and Bug Reports
 Provide feedback, get help, request features, and reports bugs here:
- https://bitbucket.org/martinvelez/stunnix_cxx_wrapper/issues?status=new?status=open
+ https://bitbucket.org/martinvelez/w32evol_ruby/issues?status=new?status=open
