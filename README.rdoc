@@ -59,6 +59,7 @@ This example is found in the examples directory.
 
 
 == 5. Development
+
 Author:: 			{Martin Velez}[http://www.martinvelez.com]
 Copyright::		Copyright (C) 2012 {Martin Velez}[http://www.martinvelez.com]
 License:: 		GPL[http://www.gnu.org/copyleft/gpl.html]
