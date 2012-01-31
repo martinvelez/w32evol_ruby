@@ -21,7 +21,7 @@ engine within your Ruby scripts.
 
 * {Ruby 1.9.2}[http://www.ruby-lang.org/en/downloads/] or greater
 * {w32evol}[https://bitbucket.org/martinvelez/w32evol/downloads]
-* {wine}[http://www.winehq.org/download) (1.3 or greater, may work with 1.2)
+* {wine}[http://www.winehq.org/download] (1.3 or greater, may work with 1.2)
 
 == 3. Installation
 
@@ -33,6 +33,7 @@ engine within your Ruby scripts.
 === Not Rubygems:
 1. Download w32evol_ruby[http://bitbucket.org/martinvelez/w32evol_ruby/downloads]
 2. Use the w32evol Ruby class in the lib folder in your program. 
+   * The w32evol.exe engine is located in this gems ext folder.
 
 == 4. Usage
 
