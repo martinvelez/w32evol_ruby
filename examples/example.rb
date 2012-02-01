@@ -1,7 +1,6 @@
 #!/usr/bin/env ruby
 
-#require 'w32evol_ruby'
-require '../lib/w32evol.rb'
+require 'w32evol_ruby'
 
 ARGF.binmode
 input = ARGF.read
