@@ -1,6 +1,7 @@
 #!/usr/bin/env ruby
 
-require 'w32evol_ruby'
+#require 'w32evol_ruby'
+require '../lib/w32evol.rb'
 
 ARGF.binmode
 input = ARGF.read
@@ -13,6 +14,7 @@ engine = W32Evol.new
 
 output, errors, status = engine.obfuscate(input)
 
+puts "INPUT:", input.inspect
 puts "STATUS:", status
 puts "ERRORS: ", errors
-puts "OUTPUT:", output
+puts "OUTPUT:", output.inspect

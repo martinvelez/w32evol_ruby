@@ -18,7 +18,7 @@ class W32Evol
 	#  :command => File.join(ENGINE_ROOT,"ext","bin","w32evol.exe")
 	#	
 	def initialize(options = {})
-		@name = self.class.to_s
+		@name = self.class.to_s.downcase
 		@options = default_options.merge(options)
 		@command_options = generate_command_options
 	end
@@ -47,9 +47,10 @@ class W32Evol
 		else
 			raise("#{input}: File does not exists or is not readable") \
 				unless File.exist?(input) and File.readable?(input)
-			outfile = Tempfile.new(["#{@name}_out",'.bin']) {|f| f.path }	
 		end
-
+	
+		outfile = Tempfile.open(["#{@name}_out",'.bin']) {|f| f.path }	
+		puts outfile
 		return obfuscate_inner(infile, outfile)		
 	end
 
@@ -61,8 +62,27 @@ class W32Evol
 		def default_options
 			{
 				# By default the engine is in the ext folder of this gem
-				:command => File.join(ENGINE_ROOT,"ext","bin","#{@name}.exe")
+				:command => File.join(ENGINE_ROOT,"ext","#{@name}.exe")
 			}
+		end
+
+		# This method converts the options Hash into a string of flags for the 
+		# command line call.
+		#
+		# Example output:
+		#  "--x cpp --x iso --x motif --x posix2 --x stl --x unix95 --x xpg4" 
+		def generate_command_options
+			command_options = ""
+			@options.each do |key, value|
+				if key.to_s != "command"
+					if value.kind_of?(Array)
+						value.each{|val| command_options += "#{key} #{val} "}
+					elsif
+						command_options += "#{key} #{value} "
+					end		
+				end
+			end
+			command_options.rstrip
 		end
 
 		# This method obfuscate the code in infile and stores in outfile
@@ -73,14 +93,14 @@ class W32Evol
 			# This engine does not output to stderr, it only returns an exit code if it
 			# fails.	
 			output, errors, exitstatus = "", "", 0
-			system "#{@name}.exe #{infile} #{outfile}"
+			puts "#{@options[:command]} #{infile} #{outfile}"
+			system "#{@options[:command]} #{infile} #{outfile}"
 			exitstatus = $?.exitstatus		
-			begin 
-				f = File.new(outfile)	
+			if exitstatus == 0
+				f = File.new(outfile)
 				output = f.sysread(f.size)
-			ensure
-				f.close 
-			end
+				f.close
+			end	
 			return output, errors, exitstatus	
 		end
 
