@@ -38,7 +38,7 @@ class W32Evol
 		# For example, let input = "\x83\xC0\x0A"
 		# Then input.inspect => "\"\\x83\"".
 		# Thus, input.inspect =~ /\\x../ => 1
-		if (input.inspect =~ /\\x.*/) > 0
+		if (input.inspect =~ /\\x.*/) >= 0
 			infile = Tempfile.open(["#{@name}_in",'.bin']) do |f| 
 				f.binmode
 				f.syswrite input
@@ -61,20 +61,23 @@ class W32Evol
 		def default_options
 			{
 				# By default the engine is in the ext folder of this gem
-				:command => File.join(ENGINE_ROOT,"ext","bin","#{@name}.exe"),
+				:command => File.join(ENGINE_ROOT,"ext","bin","#{@name}.exe")
 			}
 		end
 
 		# This method obfuscate the code in infile and stores in outfile
-		# This method is used for engines with a command line interface which requires
-		# an input file name, and an output file name.
+		#
+		# It is used for engines with a command line interface which requires an input 
+		# file name, and an output file name.
 		def obfuscate_inner(infile, outfile)
+			# This engine does not output to stderr, it only returns an exit code if it
+			# fails.	
 			output, errors, exitstatus = "", "", 0
 			system "#{@name}.exe #{infile} #{outfile}"
 			exitstatus = $?.exitstatus		
 			begin 
-				f = File.new(outfile	
-				output = f.sysread(File.size(f.path))
+				f = File.new(outfile)	
+				output = f.sysread(f.size)
 			ensure
 				f.close 
 			end
