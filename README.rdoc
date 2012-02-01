@@ -54,9 +54,10 @@ This example is found in the examples directory.
 
  output, errors, status = engine.obfuscate(input)
 
+ puts "INPUT:", input.inspect
  puts "STATUS:", status
  puts "ERRORS: ", errors
- puts "OUTPUT:", output
+ puts "OUTPUT:", output.inspect
 
 
 == 5. Development

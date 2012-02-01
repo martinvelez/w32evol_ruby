@@ -6,8 +6,11 @@ class W32Evol
 
 	# By default the engine is distributed in the ext folder of this gem.
 	# This constant allows us to find the path to the engine executable. 
-	ENGINE_ROOT = File.expand_path(File.join(File.dirname(__FILE__), '..'))
- 
+	ENGINE_ROOT 	= File.expand_path(File.join(File.dirname(__FILE__), '..'))
+	BINARY 				= true # input is in binary format
+	NOSTDIN 			= true # does not accept standard input
+	PLATFORM			= "windows" # windows program (requires wine in Linux) 
+	
 	attr_reader :options
 
 	# The user can instantiate this class by passing in a Hash of options
@@ -50,7 +53,6 @@ class W32Evol
 		end
 	
 		outfile = Tempfile.open(["#{@name}_out",'.bin']) {|f| f.path }	
-		puts outfile
 		return obfuscate_inner(infile, outfile)		
 	end
 
@@ -62,6 +64,7 @@ class W32Evol
 		def default_options
 			{
 				# By default the engine is in the ext folder of this gem
+				# This assumes that the wine command in in your PATH
 				:command => File.join(ENGINE_ROOT,"ext","#{@name}.exe")
 			}
 		end
@@ -93,10 +96,11 @@ class W32Evol
 			# This engine does not output to stderr, it only returns an exit code if it
 			# fails.	
 			output, errors, exitstatus = "", "", 0
-			puts "#{@options[:command]} #{infile} #{outfile}"
-			system "#{@options[:command]} #{infile} #{outfile}"
+			cmd = "#{@options[:command]} #{infile} #{outfile}"
+			cmd.insert(0, "wine ") if (PLATFORM == 'windows' and RUBY_PLATFORM =~ /linux/)
+			system(cmd) 
 			exitstatus = $?.exitstatus		
-			if exitstatus == 0
+			if exitstatus == 0 # if engine success
 				f = File.new(outfile)
 				output = f.sysread(f.size)
 				f.close
