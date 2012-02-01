@@ -20,8 +20,9 @@ engine within your Ruby scripts.
 == 2. Dependencies
 
 * {Ruby 1.9.2}[http://www.ruby-lang.org/en/downloads/] or greater
-* {w32evol}[https://bitbucket.org/martinvelez/w32evol/downloads]
 * {wine}[http://www.winehq.org/download] (1.3 or greater, may work with 1.2)
+* {w32evol}[https://bitbucket.org/martinvelez/w32evol/downloads] 
+  (v0.1.0 is include in this gem's ext folder)
 
 == 3. Installation
 
