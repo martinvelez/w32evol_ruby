@@ -41,7 +41,7 @@ You might need to use sudo.
 This example is found in the examples directory.
  #!/usr/bin/env ruby
 
- require 'w32evol_ruby'
+ require 'w32evol'
 
  ARGF.binmode
  input = ARGF.read
