@@ -26,13 +26,12 @@ engine within your Ruby scripts.
 == 3. Installation
 
 === Rubygems:
+You might need to use sudo.
  gem install w32evol_ruby
-
-<b>Note 1</b> You might need to use sudo.
 
 === Not Rubygems:
 1. Download w32evol_ruby[http://bitbucket.org/martinvelez/w32evol_ruby/downloads]
-2. Use the w32evol Ruby class in the lib folder in your program. 
+2. Require the w32evol Ruby class file in your program (lib folder) 
    * The w32evol.exe engine is located in this gems ext folder.
 
 == 4. Usage
@@ -43,6 +42,7 @@ This example is found in the examples directory.
 
  require 'w32evol_ruby'
 
+ ARGF.binmode
  input = ARGF.read
  # Assuming engine is installed in this gem's "ext" folder.
  # Otherwise, you must pass the engine's executable path to the class's 
