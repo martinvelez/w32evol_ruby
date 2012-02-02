@@ -7,6 +7,6 @@ Gem::Specification.new do |s|
 	s.authors = ['Martin Velez']
 	s.email = 'mvelez999@gmail.com'
 	s.files = Dir["lib/**/*","ext/**/*","examples/**/*","test/**/*","README.rdoc"]
-	s.homepage = 'http://bitbucket.org/martinvelez/w32evol'
+	s.homepage = 'http://bitbucket.org/martinvelez/w32evol_ruby'
 	s.require_paths = ["lib"]
 end
