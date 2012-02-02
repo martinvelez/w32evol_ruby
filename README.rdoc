@@ -1,4 +1,4 @@
-= w32evol_wrapper -- w32evol obfuscation engine wrapped in Ruby
+= w32evol_ruby -- w32evol obfuscation engine wrapped in Ruby
 
 == Table of Contents
 1. Introduction
