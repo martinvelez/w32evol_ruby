@@ -1,7 +1,7 @@
 require 'tempfile'
 
 # This class wraps the w32evol obfuscation engine.
-# {w32evol}[https://github.com/martinvelez/w32evol]
+# {w32evol}[https://bitbucket.org/martinvelez/w32evol]
 class W32Evol
 
 	# By default the engine is distributed in the ext folder of this gem.
@@ -23,6 +23,7 @@ class W32Evol
 	def initialize(options = {})
 		@name = self.class.to_s.downcase
 		@options = default_options.merge(options)
+		@command = generate_command
 		@command_options = generate_command_options
 	end
 	
@@ -96,9 +97,7 @@ class W32Evol
 			# This engine does not output to stderr, it only returns an exit code if it
 			# fails.	
 			output, errors, exitstatus = "", "", 0
-			cmd = "#{@options[:command]} #{infile} #{outfile}"
-			cmd.insert(0, "wine ") if (PLATFORM == 'windows' and RUBY_PLATFORM =~ /linux/)
-			system(cmd) 
+			system("#{@command} #{infile} #{outfile}")
 			exitstatus = $?.exitstatus		
 			if exitstatus == 0 # if engine success
 				f = File.new(outfile)
@@ -106,6 +105,15 @@ class W32Evol
 				f.close
 			end	
 			return output, errors, exitstatus	
+		end
+
+		def generate_command
+			if PLATFORM == 'windows'
+				return "wine #{@options[:engine]}" if RUBY_PLATFORM =~ /linux/
+			elsif PLATFORM == 'java'
+				return "java -jar #{@options[:engine]}"
+			end
+			return @options[:engine]
 		end
 
 end
