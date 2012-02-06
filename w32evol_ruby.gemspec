@@ -1,6 +1,6 @@
 Gem::Specification.new do |s|
 	s.name = 'w32evol_ruby'
-	s.version = '0.0.3'
+	s.version = '0.0.4'
 	s.date = '2012-01-31'
 	s.summary = 'A Ruby wrapper for the w32evol obfuscation engine'
 	s.description = 'Provides a Ruby wrapper for the w32evol obfuscation engine'
