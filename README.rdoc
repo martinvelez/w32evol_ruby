@@ -8,7 +8,7 @@
 5. Development
 
 == 1. Introduction
-<b>Does not contain a virus</b>
+<b>This is not a virus nor does it contain a virus.</b>
 
 This is a Ruby wrapper for the obfuscation engine 
 {w32evol}[https://bitbucket.org/martinvelez/w32evol].
