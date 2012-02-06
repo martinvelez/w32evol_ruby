@@ -18,7 +18,7 @@ class W32Evol
 	# Default options:
 	#
 	# By default the engine is distributed with this gem in the "ext" folder
-	#  :command => File.join(ENGINE_ROOT,"ext","bin","w32evol.exe")
+	#  :engine => File.join(ENGINE_ROOT,"ext","bin","w32evol.exe")
 	#	
 	def initialize(options = {})
 		@name = self.class.to_s.downcase
@@ -66,7 +66,7 @@ class W32Evol
 			{
 				# By default the engine is in the ext folder of this gem
 				# This assumes that the wine command in in your PATH
-				:command => File.join(ENGINE_ROOT,"ext","#{@name}.exe")
+				:engine => File.join(ENGINE_ROOT,"ext","#{@name}.exe")
 			}
 		end
 
